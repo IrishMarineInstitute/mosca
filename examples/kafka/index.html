@@ -30,10 +30,20 @@
    <pre id="spiddal-ctd"></pre>
    <h1>Fluorometer</h1>
    <pre id="spiddal-fluorometer"></pre>
+   <h1>Water Quality Monitor</h1>
+   <pre id="spiddal-wets-wqm"></pre>
+   <h1>Acoustic Telemetry</h1>
+   <pre id="spiddal-acoustic-telemetry"></pre>
+   <h1>Irish Wave Buoys</h1>
+   <pre id="irish-wave-buoys"></pre>
    <h1>Weather</h1>
    <pre id="airmar-rinville-1"></pre>
    <h1>AIS</h1>
+   <h2>Rinville</h2>
    <pre id="ais-rinville-1-geojson"></pre>
+   <h2>Belmullet</h2>
+   <pre id="ais-belmullet"></pre>
+   <pre id="ais-belmullet-json"></pre>
    <h1>Hydrophone</h1>
    <pre id="spiddal-hydrophone"></pre>
    <div id="login" class="hidden">
@@ -53,12 +63,17 @@
              var username = document.querySelector('.username').value;
              var password = document.querySelector('.password').value;
              document.getElementById("ais-rinville-1-geojson").innerHTML = "";
+             document.getElementById("ais-belmullet-json").innerHTML = "";
+             document.getElementById("ais-belmullet").innerHTML = "";
              document.getElementById("errors").textContent = "";
              doconnect(["spiddal-ctd",
                   "spiddal-fluorometer",
+                  "spiddal-wets-wqm",
+                  "spiddal-acoustic-telemetry",
                   "spiddal-hydrophone",
+                  "irish-wave-buoys",
                    "airmar-rinville-1",
-                  "ais-rinville-1-geojson"],username,password);
+                  "ais-rinville-1-geojson","ais-belmullet-json","ais-belmullet"],username,password);
          });
       }
       var client;
@@ -68,9 +83,9 @@
             client = null;
          }
          if(username){
-            client = mqtt.connect({username: username, password: password});
+            client = mqtt.connect("wss://mqtt.marine.ie",{username: username, password: password});
          }else{
-            client = mqtt.connect();
+            client = mqtt.connect("wss://mqtt.marine.ie");
          }
          client.on("message", function(topic, payload) {
            document.getElementById("errors").textContent = "";
@@ -91,7 +106,10 @@
 
       doconnect(["spiddal-ctd",
                  "spiddal-fluorometer",
+                 "spiddal-wets-wqm",
+                 "spiddal-acoustic-telemetry",
                  "spiddal-hydrophone",
+                 "irish-wave-buoys",
                   "airmar-rinville-1"]);
     </script>
   </body>
