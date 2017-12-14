@@ -13,7 +13,6 @@ COPY ./ /usr/src/app/
 
 RUN npm install --unsafe-perm --production
 RUN npm install -g browserify uglify-js
-# RUN browserify -r mqtt -s mqtt | uglifyjs --screw-ie8 > public/mqtt.js
 RUN browserify -r mqtt -s mqtt | uglifyjs > public/mqtt.js
 
 COPY examples/kafka/server.js lib/mosca_kafka_server.js
