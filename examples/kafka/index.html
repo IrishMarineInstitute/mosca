@@ -28,8 +28,10 @@
    <div id="errors" class="error"></div>
    <h1>CTD</h1>
    <pre id="spiddal-ctd"></pre>
+   <pre id="spiddal-ctd-json"></pre>
    <h1>Fluorometer</h1>
    <pre id="spiddal-fluorometer"></pre>
+   <pre id="spiddal-fluorometer-json"></pre>
    <h1>Water Quality Monitor</h1>
    <pre id="spiddal-wets-wqm"></pre>
    <h1>Acoustic Telemetry</h1>
@@ -67,7 +69,9 @@
              document.getElementById("ais-belmullet").innerHTML = "";
              document.getElementById("errors").textContent = "";
              doconnect(["spiddal-ctd",
+                  "spiddal-ctd-json",
                   "spiddal-fluorometer",
+                  "spiddal-fluorometer-json",
                   "spiddal-wets-wqm",
                   "spiddal-acoustic-telemetry",
                   "spiddal-hydrophone",
@@ -105,7 +109,9 @@
       showlogin();
 
       doconnect(["spiddal-ctd",
+                 "spiddal-ctd-json",
                  "spiddal-fluorometer",
+                 "spiddal-fluorometer-json",
                  "spiddal-wets-wqm",
                  "spiddal-acoustic-telemetry",
                  "spiddal-hydrophone",
