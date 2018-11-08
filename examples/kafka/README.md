@@ -43,8 +43,22 @@ Running
 
 To run the mosca mqtt server connected to your own kafka, provide the ip addresses when launching your docker container. (You'll need to add all three hosts (kafka01,kafka02,kafka03); repeat the ip address if you have fewer than three nodes in your cluster).
 
-    docker run -d --name=kafkamqtt -p 2298:80 --add-host="kafka01:172.17.1.86" --add-host="kafka02:172.17.1.87" --add-host="kafka03:172.17.1.88" kafkamqtt
+    docker run -d --name=kafkamqtt -p 2298:80 -p 1883:1883 --add-host="kafka01:172.17.1.86" --add-host="kafka02:172.17.1.87" --add-host="kafka03:172.17.1.88" kafkamqtt
 
+Running in swarm
+
+```
+docker build -f examples/kafka/Dockerfile -t 127.0.0.1:5000/kafkamqtt .  
+
+docker push 127.0.0.1:5000/kafkamqtt
+
+docker service create \
+         --name mqttbridge --publish 1883:1883 \
+         --host kafka01:172.17.1.86 \
+         --host kafka02:172.17.1.87 \
+         --host kafka03:172.17.1.88 \
+        127.0.0.1:5000/kafkamqtt
+```
 
 Credits
 -------
